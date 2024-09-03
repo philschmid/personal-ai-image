@@ -4,9 +4,10 @@ import os
 
 def main(lora_id, prompts, num_images_per_prompt):
     pipeline = DiffusionPipeline.from_pretrained("black-forest-labs/FLUX.1-dev")
-    pipeline.load_lora_weights(lora_id, weight_name="personal_flux_1_dev.safetensors")
+    pipeline.load_lora_weights(lora_id, weight_name="philipp_flux_1_dev.safetensors")
     pipeline.to("cuda")
 
+    os.makedirs("results", exist_ok=True)
     for prompt in prompts:
       out = pipeline(
                 prompt=prompt,
@@ -14,8 +15,9 @@ def main(lora_id, prompts, num_images_per_prompt):
                 num_inference_steps=28,
                 num_images_per_prompt=num_images_per_prompt
             )
+      
       for i, im in enumerate(out.images):
-        im.save(f"image_{prompt.replace(' ', '_')[:25]}_{i}.png")
+        im.save(f"results/image_{prompt.replace(' ', '_')[:25]}_{i}.png")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -39,4 +41,5 @@ if __name__ == "__main__":
       ]
     main(args.lora_id, prompts, args.num_images_per_prompt)
 
-# python run_inference.py --lora-id philschmid/flux-test-1 --prompts "Philipp, wearing a beanie, sits at a cafe table holding a warm coffee cup." --num-images-per-prompt 4
+# python run_inference.py --lora-id philschmid/flux-test-1 --prompts "A smiling Philipp looks directly at the camera for a portrait." --num-images-per-prompt 5
+# srun --nodes=1 --cpus-per-task=12 --gres=gpu:1 --partition=hopper-prod --time 6:50:00 --pty bash

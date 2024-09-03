@@ -69,7 +69,7 @@ config:
 #        low_vram: true  # uncomment this if the GPU is connected to your monitors. It will use less vram to quantize, but is slower.
       sample: # Use this to sample from the model
         sampler: "flowmatch" # must match train.noise_scheduler
-        sample_every: 250 # sample every this many steps
+        sample_every: 100 # sample every this many steps
         width: 1024
         height: 1024
         prompts:
@@ -77,10 +77,10 @@ config:
           - "[trigger] holding a sign that says 'I LOVE AI!'"
           - "[trigger] holding a coffee cup, in a beanie, sitting at a cafe"
           - "[trigger] showing off his cool new t shirt at the beach, a shark is jumping out of the water in the background"
-          - "[trigger] playing the guitar, on stage, singing a song, laser lights, punk rocker"
+          - "A smiling [trigger] looks directly at the camera for a portrait."
           - "[trigger] as a DJ at a night club, fish eye lens, smoke machine, lazer lights, holding a martini"
           - "[trigger] man building a chair, in a wood shop"
-          - "photo of [trigger], white background, medium shot, modeling clothing, studio lighting, white backdrop"
+          - "photo of [trigger], white background, medium shot, modeling clothing, studio lighting"
         neg: ""  # not used on flux
         seed: 42
         walk_seed: true
@@ -90,5 +90,3 @@ config:
 meta:
   name: "[name]"
   version: '1.0'
-
-   huggingface-cli upload philschmid/flux-test-1 /fsx/philipp/personal-ai-image/output/philipp_flux_1_dev/philipp_flux_1_dev.safetensors
