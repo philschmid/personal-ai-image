@@ -2,7 +2,7 @@
 job: extension
 config:
   # this name will be the folder and filename name
-  name: "philipp_flux_1_dev"
+  name: "personal_flux_1_dev"
   process:
     - type: 'sd_trainer'
       # root folder to save training sessions/samples/weights
@@ -19,11 +19,11 @@ config:
         linear_alpha: 16
       save:
         dtype: float16 # precision to save
-        save_every: 100 # save every this many steps
+        save_every: 250 # save every this many steps
         max_step_saves_to_keep: 4 # how many intermittent saves to keep
         push_to_hub: true #change this to True to push your trained model to Hugging Face.
         # You can either set up a HF_TOKEN env variable or you'll be prompted to log-in         
-      hf_repo_id: philschmid/flux-1-dev-philipp
+      hf_repo_id: flux-1-dev-philipp
       hf_private: true #whether the repo is private or public
       datasets:
         # datasets are a folder of images. captions need to be txt files with the same name as the image
@@ -39,7 +39,7 @@ config:
           resolution: [ 512, 768, 1024 ]  # flux enjoys multiple resolutions
       train:
         batch_size: 8
-        steps: 500  # total number of steps to train 500 - 4000 is a good range
+        steps: 4000  # total number of steps to train 500 - 4000 is a good range
         gradient_accumulation_steps: 1
         train_unet: true
         train_text_encoder: false  # probably won't work with flux
@@ -69,20 +69,18 @@ config:
 #        low_vram: true  # uncomment this if the GPU is connected to your monitors. It will use less vram to quantize, but is slower.
       sample: # Use this to sample from the model
         sampler: "flowmatch" # must match train.noise_scheduler
-        sample_every: 100 # sample every this many steps
+        sample_every: 250 # sample every this many steps
         width: 1024
         height: 1024
         prompts:
           # you can add [trigger] to the prompts here and it will be replaced with the trigger word
-          - "[trigger] holding a sign that says 'I LOVE PROMPTS!'"
+          - "[trigger] holding a sign that says 'I LOVE AI!'"
           - "[trigger] holding a coffee cup, in a beanie, sitting at a cafe"
-          - "a horse is a DJ at a night club, fish eye lens, smoke machine, lazer lights, holding a martini"
-          - "a man showing off his cool new t shirt at the beach, a shark is jumping out of the water in the background"
-          - "a bear building a log cabin in the snow covered mountains"
+          - "[trigger] showing off his cool new t shirt at the beach, a shark is jumping out of the water in the background"
           - "[trigger] playing the guitar, on stage, singing a song, laser lights, punk rocker"
+          - "[trigger] as a DJ at a night club, fish eye lens, smoke machine, lazer lights, holding a martini"
           - "[trigger] man building a chair, in a wood shop"
-          - "photo of a man, white background, medium shot, modeling clothing, studio lighting, white backdrop"
-          - "a man holding a sign that says, 'this is a sign'"          
+          - "photo of [trigger], white background, medium shot, modeling clothing, studio lighting, white backdrop"
         neg: ""  # not used on flux
         seed: 42
         walk_seed: true
@@ -92,3 +90,5 @@ config:
 meta:
   name: "[name]"
   version: '1.0'
+
+   huggingface-cli upload philschmid/flux-test-1 /fsx/philipp/personal-ai-image/output/philipp_flux_1_dev/philipp_flux_1_dev.safetensors

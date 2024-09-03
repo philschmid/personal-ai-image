@@ -23,6 +23,23 @@ echo "HF_TOKEN=your_token_value" > ai-toolkit/.env
 python ai-toolkit/run.py train_lora_flux_personal.yaml
 ```
 
+# Test prompts 
+
+```python
+[
+    "Philipp, wearing a beanie, sits at a cafe table holding a warm coffee cup.",
+    "Philipp builds a chair, surrounded by tools and wood in a workshop.",
+    "A smiling Philipp looks directly at the camera for a portrait.",
+    "Philipp hikes through a forest trail, carrying a backpack.",
+    "Philipp prepares a meal in a kitchen, chopping vegetables.",
+    "Philipp plays guitar on a stage, illuminated by spotlights.",
+    "Philipp reads a book while relaxing on a park bench.",
+    "Philipp paints a canvas with a focused expression.",
+    "Philipp rides a bicycle along a scenic coastal road.",
+    "Philipp works on a laptop at a desk in a modern office."
+]
+```
+
 
 # Tips
 
