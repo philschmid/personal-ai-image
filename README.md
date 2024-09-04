@@ -40,6 +40,27 @@ python ai-toolkit/run.py train_lora_flux_personal.yaml
 ]
 ```
 
+# Upload adapter to Hugging Face
+
+1. create repo on Hugging Face
+
+```bash
+huggingface-cli repo create flux-personal-ai
+```
+
+
+2. upload adapter to Hugging Face
+
+```bash
+huggingface-cli upload output/personal_flux_1_dev/personal_flux_1_dev.safetensors --repo-id philschmid/flux-personal-ai
+```
+
+## Slurm
+
+```bash
+sbatch --job-name=flux-img launch.slurm 
+```
+
 
 # Tips
 
